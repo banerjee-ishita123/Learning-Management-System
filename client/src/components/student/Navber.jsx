@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { useClerk,UserButton,useUser } from '@clerk/clerk-react'
 const Navber = () => {
   const isCourseListPage=location.pathname.includes('/course-list')
-  const {openSignIn}=useClerk()
+  const {openSignIn}=useClerk()/* The useClerk() and useUser() hooks are from Clerk, an authentication and user management service for React applications.*/
   const {user} =useUser()
   return (
     <div className={`flex items-center justify-between px-4 sm:px-10 md:px-14 lg:px-36 border-b border-gray-500 py-4 ${isCourseListPage ? 'bg-white':'bg-cyan-100/70'}`}>

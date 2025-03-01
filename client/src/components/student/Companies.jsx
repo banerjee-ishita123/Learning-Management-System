@@ -3,7 +3,8 @@ import React from 'react'
 const Companies = () => {
   return (
     <div>
-      <h1>Companies</h1>
+      <p>Trusted by Learners from </p>
+      <div></div>
     </div>
   )
 }
