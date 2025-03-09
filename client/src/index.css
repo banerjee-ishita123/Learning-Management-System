@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Poppins:ital,wght@0,300;1,600&display=swap');
 @import "tailwindcss";
+@media (forced-colors: active) {
+  /* Define styles for forced color mode */
+}
+
 *{
   font-family: Outfit;
 }

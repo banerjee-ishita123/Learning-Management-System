@@ -10,6 +10,7 @@ export const AppContextProvider=(props)=>{
   const navigate=useNavigate()
   const [allCourses,setallCourses]=useState([])
   const [isEducator,setisEducator]=useState(true)
+  const [enrollCourses,setenrollCourses]=useState([])
 
   //Fetch all courses
   const fetchAllCourses= async ()=>{
@@ -50,12 +51,17 @@ export const AppContextProvider=(props)=>{
       });
       return totalLecture;
   };
+  //fetch User Enrolled courses
+  const fetchEnrolledCourses=async ()=>{
+    setenrollCourses(dummyCourses)
+  }
   
   useEffect(()=>{
    fetchAllCourses()
+   fetchEnrolledCourses()
   },[])
     const value={
-       currency,allCourses,navigate,calculateRating,isEducator,setisEducator,calculChapterTime,calculateCourseDuration,calculateNoOfLecture
+       currency,allCourses,navigate,calculateRating,isEducator,setisEducator,calculChapterTime,calculateCourseDuration,calculateNoOfLecture,enrollCourses,fetchEnrolledCourses
     }
         return(
           /*<AppContext.Provider> is the actual provider that shares data. 

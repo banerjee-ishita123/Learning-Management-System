@@ -24,6 +24,7 @@ const CourseDetails = () => {
   useEffect(()=>{
     fetchAllData()
   },[allCourses])
+
   const toggleSection=(index)=>{
     setOpenSection((prev)=>({...prev,
       [index]: !prev[index],
@@ -57,7 +58,7 @@ const CourseDetails = () => {
                        <div className='flex items-center justify-between px-4 py-3 cursor-pointer select-none' onClick={()=>{toggleSection(index)}}>
                          <div className='flex items-center gap-2'>
                          <img 
-  s                        src={assets.down_arrow_icon} 
+                        src={assets.down_arrow_icon} 
                            alt='arrow-icon' 
                          className={`transform transition-transform duration-300 ${openSection[index] ? 'rotate-180' : ''}`}
                           />
