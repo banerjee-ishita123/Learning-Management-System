@@ -8,14 +8,14 @@ const Navber = () => {
   const {user}=useUser()
   return (
    
-    <div>
+    <div className='flex items-center justify-between px-4 md:px-8 border-b border-gray-300 py-3'>
        <Link to={'/'}>
        
       <img src={assets.logo} alt='Logo' className='w-28 lg:w-32 cursor-pointer' />
       </Link>
-      <div>
-        <p>Hi!{user?user.fullName : 'Developers'}</p>
-        {user ? UserButton : <img src={assets.profile_img} className='max-w-8'/>}
+      <div className='flex items-center gap-5 text-gray-500 relative'>
+        <p>Hi! {user ? user.fullName : 'Developers'}</p>
+        {user ? <UserButton/> : <img src={assets.profile_img} className='max-w-8'/>}
       </div>
     </div>
   )
