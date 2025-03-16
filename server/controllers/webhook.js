@@ -20,7 +20,7 @@ switch (type) {
       _id:data.id,
       email:data.email_addresses[0].email_address,
       name:data.first_name + " " + data.last_name,
-      imageUrl:data.image_url
+      imageUrl:data.image_url,
     }
      await User.create(userData)
      res.json({})
@@ -29,9 +29,9 @@ switch (type) {
     
    case 'user.updated':{
     const userData={
-    email:data.email_address[0].email_address,
+    email:data.email_addresses[0].email_address,
     name:data.first_name + " " + data.last_name,
-    imageUrl:data.image_url
+    imageUrl:data.image_url,
     }
     await User.findByIdAndUpdate(data.id,userData)
     res.json({})
@@ -47,7 +47,7 @@ switch (type) {
     break;
 }
 } catch(error){
-  res.json({'success':false,message:error.message})
+  res.json({success:false,message:error.message})
 
 }
 }
