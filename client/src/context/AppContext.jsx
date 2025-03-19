@@ -1,13 +1,19 @@
 import { createContext, useEffect, useState } from "react";
 import { dummyCourses } from "../assets/assets";
 import { useNavigate } from "react-router-dom";
-import humanizeDuration from 'humanize-duration'
+import humanizeDuration from 'humanize-duration';
+import {useAuth,useUser} from '@clerk/clerk-react'
 export const AppContext = createContext()/* AppContex act like a storage box where we can keep storage data*/ 
 export const AppContextProvider=(props)=>{
   /* This AppContexProvider component will wrap around the parts of our app that need access to the shared data.*/
   
   const currency=import.meta.env.VITE_CURRENCY
   const navigate=useNavigate()
+  const {getToken}=useAuth()
+  const {user}=useUser()
+
+
+
   const [allCourses,setallCourses]=useState([])
   const [isEducator,setisEducator]=useState(true)
   const [enrollCourses,setenrollCourses]=useState([])
@@ -60,6 +66,15 @@ export const AppContextProvider=(props)=>{
    fetchAllCourses()
    fetchEnrolledCourses()
   },[])
+
+  const logTokan=async()=>{
+    console.log(await getToken());
+  }
+  useEffect(()=>{
+if(user){
+logTokan()
+}
+  },[user])
     const value={
        currency,allCourses,navigate,calculateRating,isEducator,setisEducator,calculChapterTime,calculateCourseDuration,calculateNoOfLecture,enrollCourses,fetchEnrolledCourses
     }
