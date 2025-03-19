@@ -24,7 +24,7 @@ const courseSchema=new mongoose.Schema({
   courseContent:[chapterSchema],
   courseRating:[
     {
-      userId:{type:String},rating:{type:Number,min:0,max:5}
+      userId:{type:String},rating:{type:Number,min:1,max:5}
     }
   ],
   educator:{type:String,ref:'User',required:true},

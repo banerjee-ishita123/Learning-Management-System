@@ -13,12 +13,13 @@ import MyCourses from './pages/educator/MyCourses'
 import StudentsEnrolled from './pages/educator/StudentsEnrolled'
 import Navber from './components/student/Navber'
 
+
 import "quill/dist/quill.snow.css";
 const App = () => {
   const isEducatorRoute=useMatch('/educator/*')
   return (
     <div className='text-default min-h-screen bg-white'>
-      {!isEducatorRoute&&<Navber/>}
+       {!isEducatorRoute&&<Navber/>}
       
       <Routes>
     <Route path='/' element={<Home/>}/>
