@@ -11,7 +11,7 @@ import { toast } from 'react-toastify';
 import Loading from '../../components/student/Loading';
 
 const Player = () => {
-  const { enrolledCourses, calculateChapterTime, backendUrl, getToken, userData, fetchEnrolledCourses } = useContext(AppContext);
+  const { enrolledCourses, calculChapterTime, backendUrl, getToken, userData, fetchEnrolledCourses } = useContext(AppContext);
   const { courseId } = useParams();
 
   const [courseData, setCourseData] = useState(null);
@@ -145,7 +145,7 @@ const Player = () => {
                          className={`transform transition-transform duration-300 ${openSection[index] ? 'rotate-180' : ''}`} />
                     <p className="font-medium md:text-base text-sm">{chapter.chapterTitle}</p>
                   </div>
-                  <p>{chapter.chapterContent.length} lectures - {calculateChapterTime(chapter)}</p>
+                  <p>{chapter.chapterContent.length} lectures - {calculChapterTime(chapter)}</p>
                 </div>
                 <div className={`overflow-hidden transition-all duration-300 ${openSection[index] ? 'max-h-[500px]' : 'max-h-0'}`}>
                   <ul className="list-disc md:pl-10 pl-4 pr-4 py-2 text-gray-600 border-t border-gray-300">

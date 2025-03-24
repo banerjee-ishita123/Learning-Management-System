@@ -65,7 +65,7 @@ export const AppContextProvider = (props) => {
   };
 
   // Function to calculate chapter time
-  const calculateChapterTime = (chapter) => {
+  const calculChapterTime = (chapter) => {
     const time = chapter.chapterContent.reduce(
       (acc, lecture) => acc + lecture.lectureDuration,
       0
@@ -141,7 +141,7 @@ export const AppContextProvider = (props) => {
         userData,
         getToken,
         fetchAllCourses,
-        calculateChapterTime,
+        calculChapterTime,
         calculateCourseDuration,
         calculateNoOfLectures,
       }}
