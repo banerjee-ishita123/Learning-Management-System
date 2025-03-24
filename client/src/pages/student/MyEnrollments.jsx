@@ -57,7 +57,10 @@ const MyEnrollments = () => {
     if (userData && enrolledCourses.length === 0) {
       fetchEnrolledCourses();
     }
-  }, [userData]);
+  }, [userData, enrolledCourses]);  // ✅ Added `enrolledCourses`
+  useEffect(() => {
+    console.log("Updated Enrolled Courses:", enrolledCourses);
+  }, [enrolledCourses]);
 
   useEffect(() => {
     if (enrolledCourses.length > 0) {
