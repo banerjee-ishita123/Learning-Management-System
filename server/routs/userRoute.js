@@ -1,6 +1,6 @@
 import express from 'express';
 import { addUserRating, getUserCourseProgress, getUserData, purchaseCourse, updateUserCourseProgress, userEnrollCourses } from '../controllers/userController.js';
-
+import { protectEducator } from '../middlewars/authMiddleware.js';
 const userRouter=express.Router()
 userRouter.get('/data',getUserData)
 userRouter.get('/enrolled-courses',userEnrollCourses)

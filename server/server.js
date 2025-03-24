@@ -18,8 +18,13 @@ await connectDB()
 await connectCloudinary()
 //Middilwares
 app.use(cors())
+app.use(express.json());
 app.use(clerkMiddleware())
-
+{app.use((req, res, next) => {
+  console.log("Auth Object:", req.auth);
+  console.log("Headers:", req.headers.authorization);
+  next();
+});}
 //Routs
 app.get('/',(req,res)=>res.send('Api Working'))
 app.post('/clerk',express.json(),clerkWebhooks)

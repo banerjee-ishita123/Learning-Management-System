@@ -5,6 +5,7 @@ import { NavLink } from 'react-router-dom';
 
 const Sidebar = () => {
   const {isEducator}=useContext(AppContext)
+  console.log("Sidebar Render - isEducator:", isEducator);
   const menuItems=[
       {name:'Dashboard',path:'/educator',icon:assets.home_icon},
       {name:'Add Course',path:'/educator/add-course',icon:assets.add_icon},
@@ -12,6 +13,7 @@ const Sidebar = () => {
       {name:'Student Enrolled',path:'/educator/student-enrolled',icon:assets.my_course_icon},
   ];
   return  isEducator &&(
+
     <div className='md:w-64 w-16  text-base min-h-screen border-r border-gray-300 py-3 flex flex-col'>
       {menuItems.map((item)=>(
         <NavLink

@@ -1,10 +1,14 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useContext, useEffect, useRef } from 'react'
 import uniqid from 'uniqid';
 import Quill from 'quill'
 import { useState } from 'react';
 import Theme from 'quill/core/theme';
 import { assets } from '../../assets/assets';
+import { AppContext } from '../../context/AppContext';
+import { toast } from 'react-toastify';
+import axios from 'axios';
 const AddCourse = () => {
+  const {backendUrl,getToken}=useContext(AppContext)
   const quillref=useRef(null);
   const editorref=useRef(null);
   const [courseTitle,setCourseTitle]=useState('')
@@ -84,7 +88,38 @@ const AddCourse = () => {
     })
   }
   const handlesubmit=async(e)=>{
-    e.preventDefault()
+    try {
+      e.preventDefault()
+      if(!image){
+        toast.error('Thumbnail not selected')
+      }
+      const courseData={
+        courseTitle,
+        courseDescription:quillref.current.root.innerHTML,
+        coursePrice:Number(coursePrice),
+        discount:Number(discount),
+        courseContent:chapters
+      }
+      const fromData=new FormData()
+      fromData.append('courseData',JSON.stringify(courseData))
+      fromData.append('image',image)
+      const token=await getToken()
+      const {data}=await axios.post(backendUrl + '/api/educator/add-course',fromData,{ headers: { Authorization: `Bearer ${token}`}})
+    if (data.success) {
+            toast.success(data.message);
+            setCourseTitle('')
+            setCoursePrice(0)
+            setDiscount(0)
+            setImage(null)
+            setChapters([])
+            quillref.current.root.innerHTML=""
+          } else {
+            toast.error(data.message);
+          }
+        } catch (error) {
+          toast.error(error.message);
+        }
+    
   }
   useEffect(
     //initiate quill only once
@@ -125,7 +160,7 @@ const AddCourse = () => {
       </div>
       <div className='flex flex-col gap-1'>
           <p>Discount%</p>
-          <input onChange={e=>setDiscount(e.target.value)} value={coursePrice} type='number' placeholder='0' min={0} max={100} className='outline-none md:py-2.5 py-2 w-28 px-3 rounded border border-gray-500' required/>
+          <input onChange={e=>setDiscount(e.target.value)} value={discount} type='number' placeholder='0' min={0} max={100} className='outline-none md:py-2.5 py-2 w-28 px-3 rounded border border-gray-500' required/>
         </div>
         {/* adding chapters and lecturs */}
         <div>
