@@ -41,6 +41,7 @@ const CourseDetails = () => {
    }
   };
   const enrollCourse=async()=>{
+    console.log(userData)
     try {
       if(!userData){
         return toast.warn('Login to enroll')

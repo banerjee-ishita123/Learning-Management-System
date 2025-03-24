@@ -43,7 +43,7 @@ export const AppContextProvider = (props) => {
       });
 
       if (data.success) {
-        setUserData(data.user);
+        setUserData(data.message);
         setIsEducator(data.user?.role === "educator");
       } else {
         toast.error("Failed to fetch user data.");
