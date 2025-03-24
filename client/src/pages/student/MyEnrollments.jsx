@@ -14,7 +14,7 @@ const MyEnrollments = () => {
     fetchEnrolledCourses,
     backendUrl,
     getToken,
-    calculateNoOfLecture,
+    calculateNoOfLectures,
   } = useContext(AppContext);
 
   const [progressArray, setProgressArray] = useState([]);
@@ -22,23 +22,36 @@ const MyEnrollments = () => {
   const getCourseProgress = async () => {
     try {
       const token = await getToken();
+      console.log('Fetching progress with token:', token);
+  
       const tempProgressArray = await Promise.all(
         enrolledCourses.map(async (course) => {
-          const { data } = await axios.post(
-            `${backendUrl}/api/user/get-coure-progress`, // ✅ Fixed typo
-            { courseId: course._id },
-            { headers: { Authorization: `Bearer ${token}` } }
-          );
-          let totalLectures = calculateNoOfLecture(course);
-          const lectureCompleted = data.progressData ? data.progressData.lectureCompleted.length : 0;
-          return { totalLectures, lectureCompleted };
+          try {
+            console.log(`Fetching progress for course: ${course._id}`);
+            const { data } = await axios.post(
+              `${backendUrl}/api/user/get-coure-progress`, // ✅ Fixed typo
+              { courseId: course._id },
+              { headers: { Authorization: `Bearer ${token}` } }
+            );
+            console.log('Progress data:', data);
+  
+            let totalLectures = calculateNoOfLectures(course);
+            const lectureCompleted = data.progressData ? data.progressData.lectureCompleted.length : 0;
+            return { totalLectures, lectureCompleted };
+          } catch (err) {
+            console.error(`Error fetching progress for course ${course._id}:`, err);
+            return { totalLectures: 0, lectureCompleted: 0 }; // Prevent breaking UI
+          }
         })
       );
+  
       setProgressArray(tempProgressArray);
     } catch (error) {
+      console.error('Error in getCourseProgress:', error);
       toast.error(error.response?.data?.error || 'Error fetching progress');
     }
   };
+  
 
   useEffect(() => {
     if (userData && enrolledCourses.length === 0) {
