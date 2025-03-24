@@ -24,7 +24,7 @@ const CourseDetails = () => {
     userData,
     currency,
     calculateCourseDuration,
-    calculateNoOfLecture,
+    calculateNoOfLectures,
     getToken
   } = useContext(AppContext);
   console.log(userData)
@@ -240,7 +240,7 @@ const CourseDetails = () => {
                 <div className='h-4 w-px bg-gray-500/40'></div>
                 <div className='flex items-center gap-1'>
                 <img src={assets.lesson_icon} alt="clock icon" />
-                <p>{calculateNoOfLecture(courseData)} lessons</p>
+                <p>{calculateNoOfLectures(courseData)} lessons</p>
                 </div>
 
             </div>
